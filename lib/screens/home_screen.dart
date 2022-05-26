@@ -18,19 +18,22 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: const <Widget>[
-              CustomAppBar("История Кыргызстана"),
+              CustomAppBar(
+                "История Кыргызстана",
+                isHome: true,
+              ),
               ImageButton(
                 "Параграфы",
                 "assets/images/home-pic1.jpg",
                 "/paragraphs",
               ),
               ImageButton(
-                "Исторические личности",
+                "Личности",
                 "assets/images/home-pic2.jpg",
                 "",
               ),
               ImageButton(
-                "Тест",
+                "Тестирование",
                 "assets/images/home-pic3.jpg",
                 "",
               ),

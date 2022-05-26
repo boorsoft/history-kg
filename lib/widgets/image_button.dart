@@ -10,43 +10,56 @@ class ImageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed(_route!);
-        },
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Hero(
-              tag: _imagePath!,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25.0),
-                child: Image.asset(_imagePath!, fit: BoxFit.cover),
+      padding: const EdgeInsets.only(bottom: 28, left: 18, right: 18),
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: <Widget>[
+          const SizedBox(
+            height: 184,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(_route!);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(14.0),
+              child: Image.asset(
+                _imagePath!,
+                fit: BoxFit.cover,
+                width: 357,
+                height: 164,
               ),
             ),
-            Positioned(
-              width: 170.0,
-              left: 45.0,
-              bottom: 45.0,
+          ),
+          Positioned(
+            bottom: 0.5,
+            child: Container(
+              width: 155,
+              height: 36,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: const Color(0xFF5547F0),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: const Color(0xff33333340).withOpacity(0.25),
+                    blurRadius: 4.0,
+                    offset: const Offset(0, 4.0),
+                  ),
+                ],
+              ),
               child: Text(
                 _buttonText!,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 19.0,
-                  fontWeight: FontWeight.bold,
-                  shadows: <Shadow>[
-                    Shadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.5),
-                      blurRadius: 4.0,
-                      offset: Offset(2.0, 2.0),
-                    ),
-                  ],
+                  color: Color(0xFFF9F9FF),
+                  fontSize: 16,
+                  letterSpacing: 0.7,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -50,7 +50,10 @@ class ParagraphsState extends State<ParagraphsScreen> {
                     var paragraph = paragraphsData[index];
                     var image = API_URL + "/" + paragraph['image'];
                     return ParagraphImageButton(
-                        paragraph['title'], image, paragraph['id']);
+                      paragraph['title'],
+                      paragraph['id'],
+                      imagePath: '',
+                    );
                   }),
             )
           ],

@@ -2,51 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:history_kg/screens/paragraph_screen.dart';
 
 class ParagraphImageButton extends StatelessWidget {
-  final String? _buttonText;
-  final String? _imagePath;
   final int id;
+  final String? _buttonText;
+  final String? imagePath;
 
-  const ParagraphImageButton(this._buttonText, this._imagePath, this.id,
-      {Key? key})
+  const ParagraphImageButton(this._buttonText, this.id,
+      {Key? key, this.imagePath})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ParagraphScreen(_buttonText!, id)));
         },
         child: Stack(
-          alignment: Alignment.bottomLeft,
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
           children: [
-            Hero(
-              tag: _imagePath!,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25.0),
-                child: Image(
-                    image: Image.network(_imagePath!, fit: BoxFit.cover).image),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: Image(
+                image: Image.network(
+                  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+                ).image,
+                width: 343,
+                height: 100,
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(
-              width: 170.0,
-              left: 45.0,
-              bottom: 45.0,
-              child: Text(
-                _buttonText!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 19.0,
-                  fontWeight: FontWeight.bold,
-                  shadows: <Shadow>[
-                    Shadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.5),
+              left: -2.5,
+              child: Container(
+                width: 225,
+                height: 36,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF5547F0),
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: const Color(0xff33333340).withOpacity(0.25),
                       blurRadius: 4.0,
-                      offset: Offset(2.0, 2.0),
+                      offset: const Offset(0, 4.0),
                     ),
                   ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22),
+                  child: Text(
+                    _buttonText!,
+                    style: const TextStyle(
+                      color: Color(0xFFF9F9FF),
+                      fontSize: 14,
+                      letterSpacing: 0.4,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
             )

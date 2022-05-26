@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:history_kg/services/paragraphs_service.dart';
 import 'package:history_kg/widgets/app_bar.dart';
 
@@ -15,19 +15,22 @@ class ParagraphScreen extends StatefulWidget {
 
 class _ParagraphScreenState extends State<ParagraphScreen> {
   ParagraphsService paragraphsService = ParagraphsService();
-  late String data = "";
+  Map<String, dynamic> paragraphData = {};
+  bool isLoading = true;
 
   @override
   void initState() {
-    getParagraph();
     super.initState();
+    getParagraph();
   }
 
-  void getParagraph() async {
+  Future<void> getParagraph() async {
     try {
-      data = await paragraphsService.fetchParagraphById(widget.id);
-      setState(() {});
-      print(data);
+      paragraphData = await paragraphsService.fetchParagraphById(widget.id);
+      print(paragraphData);
+      setState(() {
+        isLoading = false;
+      });
     } catch (e) {
       print(e);
     }
@@ -36,12 +39,18 @@ class _ParagraphScreenState extends State<ParagraphScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [CustomAppBar(widget.title), MarkdownBody(data: data)],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomAppBar(widget.title),
+              Html(
+                data: paragraphData['text'].toString(),
+              )
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
