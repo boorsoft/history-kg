@@ -26,7 +26,7 @@ class ImageButton extends StatelessWidget {
               child: Image.asset(
                 _imagePath!,
                 fit: BoxFit.cover,
-                width: 357,
+                width: 390,
                 height: 164,
               ),
             ),

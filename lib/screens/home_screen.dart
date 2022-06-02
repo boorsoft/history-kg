@@ -15,35 +15,41 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: const <Widget>[
-              CustomAppBar(
-                "История Кыргызстана",
-                isHome: true,
+        body: Column(
+          children: <Widget>[
+            const CustomAppBar(
+              "История Кыргызстана",
+              isHome: true,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: const <Widget>[
+                    ImageButton(
+                      "Параграфы",
+                      "assets/images/home-pic1.jpg",
+                      "/paragraphs",
+                    ),
+                    ImageButton(
+                      "Личности",
+                      "assets/images/home-pic2.jpg",
+                      "",
+                    ),
+                    ImageButton(
+                      "Тестирование",
+                      "assets/images/home-pic3.jpg",
+                      "/quizMenu",
+                    ),
+                    ImageButton(
+                      "О прилложении",
+                      "assets/images/home-pic4.jpg",
+                      "",
+                    ),
+                  ],
+                ),
               ),
-              ImageButton(
-                "Параграфы",
-                "assets/images/home-pic1.jpg",
-                "/paragraphs",
-              ),
-              ImageButton(
-                "Личности",
-                "assets/images/home-pic2.jpg",
-                "",
-              ),
-              ImageButton(
-                "Тестирование",
-                "assets/images/home-pic3.jpg",
-                "",
-              ),
-              ImageButton(
-                "О прилложении",
-                "assets/images/home-pic4.jpg",
-                "",
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

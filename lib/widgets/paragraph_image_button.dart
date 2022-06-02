@@ -27,10 +27,10 @@ class ParagraphImageButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
               child: Image(
                 image: Image.network(
-                  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+                  imagePath!,
                 ).image,
-                width: 343,
-                height: 100,
+                width: 373,
+                height: 115,
                 fit: BoxFit.cover,
               ),
             ),

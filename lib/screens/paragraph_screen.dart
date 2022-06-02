@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:history_kg/services/paragraphs_service.dart';
+import 'package:history_kg/utils/styles.dart';
 import 'package:history_kg/widgets/app_bar.dart';
 
 class ParagraphScreen extends StatefulWidget {
@@ -38,19 +39,26 @@ class _ParagraphScreenState extends State<ParagraphScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomAppBar(widget.title),
-              Html(
-                data: paragraphData['text'].toString(),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+    return isLoading
+        ? circularIndicator
+        : Scaffold(
+            body: SafeArea(
+              child: Column(
+                children: [
+                  CustomAppBar(widget.title),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Html(
+                          data: paragraphData['text'].toString(),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
   }
 }

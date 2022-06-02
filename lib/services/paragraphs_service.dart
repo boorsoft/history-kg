@@ -4,8 +4,6 @@ import 'package:history_kg/utils/constans.dart';
 import 'package:http/http.dart' as http;
 
 class ParagraphsService {
-  ParagraphsService();
-
   Future<List<dynamic>> fetchParagraphs() async {
     http.Response response = await http.get(Uri.parse(API_PARAGRAPHS));
     if (response.statusCode == 200) {

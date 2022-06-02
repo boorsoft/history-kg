@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_kg/screens/paragraphs_screen.dart';
+import 'package:history_kg/screens/quiz_menu_screen.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/paragraphs_screen.dart';
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'RobotoFlex'),
       home: const HomeScreen(),
       routes: <String, WidgetBuilder>{
-        "/paragraphs": (BuildContext context) => const ParagraphsScreen()
+        "/paragraphs": (BuildContext context) => const ParagraphsScreen(),
+        "/quizMenu": (BuildContext context) => const QuizMenuScreen()
       },
     );
   }
