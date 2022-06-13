@@ -50,7 +50,7 @@ class _QuizScreenState extends State<QuizMenuScreen> {
                       itemCount: quizData.length,
                       itemBuilder: (BuildContext context, int index) {
                         var quiz = quizData[index];
-                        print(quiz['questions']);
+
                         List questions = quiz['questions'];
                         return QuizImageButton(
                           quiz['id'],

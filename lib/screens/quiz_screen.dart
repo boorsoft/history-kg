@@ -1,7 +1,9 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:history_kg/widgets/answer_button.dart';
 import 'package:history_kg/widgets/app_bar.dart';
 import 'package:history_kg/widgets/confirm_button.dart';
+import 'package:history_kg/widgets/result_dialog.dart';
 
 class QuizScreen extends StatefulWidget {
   final List questions;
@@ -19,6 +21,7 @@ class _QuizScreenState extends State<QuizScreen> {
   bool quizFinished = false;
   bool hasMultipleCorrectAnswers = false;
   List selectedAnswers = [];
+  List isSelected = [];
   bool confirmed = false;
 
   @override
@@ -30,8 +33,10 @@ class _QuizScreenState extends State<QuizScreen> {
   bool checkHasMultipleCorrectAnswers() {
     int correctCount = 0;
     List answers = widget.questions[currentIndex]['answers'];
+
     for (var answer in answers) {
       if (answer['isCorrectAnswer']) correctCount += 1;
+      isSelected.add(false);
     }
 
     if (correctCount > 1) {
@@ -39,6 +44,11 @@ class _QuizScreenState extends State<QuizScreen> {
     } else {
       return false;
     }
+  }
+
+  bool onSelect(int index) {
+    isSelected[index] = !isSelected[index];
+    return isSelected[index];
   }
 
   void selectMultipleAnswers(answer) {
@@ -52,12 +62,16 @@ class _QuizScreenState extends State<QuizScreen> {
   void nextQuestion() {
     if (currentIndex >= widget.questions.length - 1) return;
     setState(() {
+      isSelected = [];
+    });
+    setState(() {
       selectedAnswers = [];
       currentIndex += 1;
       isAnswerDisabled = false;
       isButtonActive = false;
       confirmed = false;
     });
+    checkHasMultipleCorrectAnswers();
   }
 
   void confirm() {
@@ -85,11 +99,11 @@ class _QuizScreenState extends State<QuizScreen> {
       if (answer['isCorrectAnswer']) {
         setState(() {
           correctAnswersCount += 1;
-          confirmed = true;
         });
       }
       setState(() {
         isAnswerDisabled = true;
+        confirmed = true;
       });
     } else {
       selectMultipleAnswers(answer);
@@ -100,10 +114,7 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() {
       quizFinished = true;
     });
-  }
-
-  getIsSelected(bool isSelected) {
-    isSelected = false;
+    dialog(context, correctAnswersCount, widget.questions.length);
   }
 
   @override
@@ -169,13 +180,16 @@ class _QuizScreenState extends State<QuizScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   var answers = widget.questions[currentIndex]['answers'];
                   return AnswerButton(
-                      answers[index],
-                      confirmed,
-                      hasMultipleCorrectAnswers,
-                      isAnswerDisabled,
-                      isButtonActive,
-                      onAnswerClick,
-                      getIsSelected);
+                    answers[index],
+                    onSelect,
+                    index,
+                    isSelected[index],
+                    confirmed,
+                    hasMultipleCorrectAnswers,
+                    isAnswerDisabled,
+                    isButtonActive,
+                    onAnswerClick,
+                  );
                 },
               ),
             ),
@@ -187,6 +201,82 @@ class _QuizScreenState extends State<QuizScreen> {
                     : ConfirmButton("Завершить", finishQuiz)
                 : const SizedBox()
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget answerButton(
+    dynamic answer,
+    bool confirmed,
+    bool hasMultipleCorrectAnswers,
+    bool disabled,
+    bool buttonActive,
+    bool isSelected,
+    bool isClicked,
+    Function onClick,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        if (disabled) return;
+        onClick(answer);
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 35,
+          right: 35,
+          bottom: 20,
+        ),
+        child: Container(
+          height: 76,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: !hasMultipleCorrectAnswers
+                ? isClicked
+                    ? answer['isCorrectAnswer']
+                        ? const Color(0xFF81FFC2)
+                        : const Color(0xFFFF7888)
+                    : disabled
+                        ? answer['isCorrectAnswer']
+                            ? const Color(0xFF81FFC2)
+                            : const Color(0xFFF9F9FF)
+                        : const Color(0xFFF9F9FF)
+                : confirmed
+                    ? isSelected
+                        ? const Color(0xFF81FFC2)
+                        : const Color(0xFFFF7888)
+                    : const Color(0xFFF9F9FF),
+            border: hasMultipleCorrectAnswers
+                ? isClicked
+                    ? isSelected
+                        ? buttonActive
+                            ? Border.all(
+                                width: 1, color: const Color(0xFF5547F0))
+                            : null
+                        : null
+                    : null
+                : null,
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF4644AA).withOpacity(0.1),
+                offset: const Offset(8, 4),
+                blurRadius: 24,
+              ),
+            ],
+          ),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Image.asset(
+                  'assets/images/Select.png',
+                  width: 25,
+                  height: 25,
+                ),
+              ),
+              Text(answer['text'])
+            ],
+          ),
         ),
       ),
     );

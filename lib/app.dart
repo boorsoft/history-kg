@@ -5,9 +5,14 @@ import 'package:history_kg/screens/quiz_menu_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/paragraphs_screen.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'RobotoFlex'),
       home: const HomeScreen(),
       routes: <String, WidgetBuilder>{
+        "/home": (BuildContext context) => const HomeScreen(),
         "/paragraphs": (BuildContext context) => const ParagraphsScreen(),
         "/quizMenu": (BuildContext context) => const QuizMenuScreen()
       },

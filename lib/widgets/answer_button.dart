@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 
 class AnswerButton extends StatefulWidget {
   final dynamic answer;
+  final Function onSelected;
+  final int index;
+  bool isSelected;
   final bool confirmed;
   final bool hasMultipleCorrectAnswers;
   final bool disabled;
   final bool buttonActive;
   final Function onClick;
-  final Function sendIsSelected;
-  const AnswerButton(
+  AnswerButton(
       this.answer,
+      this.onSelected,
+      this.index,
+      this.isSelected,
       this.confirmed,
       this.hasMultipleCorrectAnswers,
       this.disabled,
       this.buttonActive,
       this.onClick,
-      this.sendIsSelected,
       {Key? key})
       : super(key: key);
 
@@ -24,23 +28,13 @@ class AnswerButton extends StatefulWidget {
 }
 
 class _AnswerButtonState extends State<AnswerButton> {
-  bool isClicked = false;
-  bool isSelected = false;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    widget.sendIsSelected(isSelected);
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (widget.disabled) return;
-        isClicked = true;
-        isSelected = !isSelected;
+
+        widget.onSelected(widget.index);
         widget.onClick(widget.answer);
       },
       child: Padding(
@@ -54,7 +48,7 @@ class _AnswerButtonState extends State<AnswerButton> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: !widget.hasMultipleCorrectAnswers
-                ? isClicked
+                ? widget.isSelected
                     ? widget.answer['isCorrectAnswer']
                         ? const Color(0xFF81FFC2)
                         : const Color(0xFFFF7888)
@@ -64,17 +58,18 @@ class _AnswerButtonState extends State<AnswerButton> {
                             : const Color(0xFFF9F9FF)
                         : const Color(0xFFF9F9FF)
                 : widget.confirmed
-                    ? isSelected
-                        ? const Color(0xFF81FFC2)
-                        : const Color(0xFFFF7888)
+                    ? widget.isSelected
+                        ? widget.answer['isCorrectAnswer']
+                            ? const Color(0xFF81FFC2)
+                            : const Color(0xFFFF7888)
+                        : widget.answer['isCorrectAnswer']
+                            ? const Color(0xFFb2d6e0)
+                            : const Color(0xFFF9F9FF)
                     : const Color(0xFFF9F9FF),
             border: widget.hasMultipleCorrectAnswers
-                ? isClicked
-                    ? isSelected
-                        ? widget.buttonActive
-                            ? Border.all(
-                                width: 1, color: const Color(0xFF5547F0))
-                            : null
+                ? widget.isSelected
+                    ? widget.buttonActive
+                        ? Border.all(width: 1, color: const Color(0xFF5547F0))
                         : null
                     : null
                 : null,
