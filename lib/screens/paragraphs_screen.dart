@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:history_kg/services/paragraphs_service.dart';
-import 'package:history_kg/utils/constans.dart';
 import 'package:history_kg/utils/styles.dart';
 import 'package:history_kg/widgets/app_bar.dart';
+import 'package:history_kg/widgets/failure.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../widgets/paragraph_image_button.dart';
 
@@ -22,46 +23,58 @@ class ParagraphsState extends State<ParagraphsScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => getParagraphs());
     getParagraphs();
   }
 
   Future<void> getParagraphs() async {
-    try {
-      paragraphsData = await paragraphsService.fetchParagraphs();
+    paragraphsData = await paragraphsService.fetchParagraphs();
 
-      setState(() {
-        isLoading = false;
-      });
-    } catch (e) {
-      print(e);
-    }
+    await Future.wait(paragraphsData
+        .map((data) => cachedImage(context, data['image']))
+        .toList());
+    setState(() {
+      isLoading = false;
+    });
   }
+
+  Future cachedImage(BuildContext context, String imageUrl) =>
+      precacheImage(CachedNetworkImageProvider(imageUrl), context);
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? circularIndicator
-        : Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: <Widget>[
-                  const CustomAppBar('Параграфы'),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: paragraphsData.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var paragraph = paragraphsData[index];
+    if (isLoading) {
+      return circularIndicator;
+    } else {
+      if (paragraphsData[0] == 'no internet' || paragraphsData[0] == '500') {
+        return Failure(paragraphsData[0], 'Параграфы');
+      }
+      return Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              const CustomAppBar('Параграфы'),
+              Expanded(
+                child: ListView.separated(
+                    itemCount: paragraphsData.length,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(
+                          color: Colors.white,
+                        ),
+                    itemBuilder: (BuildContext context, int index) {
+                      var paragraph = paragraphsData[index];
 
-                          return ParagraphImageButton(
-                            paragraph['title'],
-                            paragraph['id'],
-                            imagePath: paragraph['image'],
-                          );
-                        }),
-                  )
-                ],
-              ),
-            ),
-          );
+                      return ParagraphImageButton(
+                        paragraph['title'],
+                        paragraph['id'],
+                        imagePath: paragraph['image'],
+                      );
+                    }),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

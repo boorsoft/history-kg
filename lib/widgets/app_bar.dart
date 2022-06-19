@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:history_kg/utils/styles.dart';
-import 'package:history_kg/widgets/image_button.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -24,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Image.asset(
                         "assets/images/Back Button.jpg",
                         width: 30,

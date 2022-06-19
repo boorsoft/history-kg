@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ImageButton(
                       "Личности",
                       "assets/images/home-pic2.jpg",
-                      "",
+                      "/persons",
                     ),
                     ImageButton(
                       "Тестирование",

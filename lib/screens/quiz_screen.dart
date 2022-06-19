@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:history_kg/widgets/answer_button.dart';
 import 'package:history_kg/widgets/app_bar.dart';
@@ -62,10 +61,8 @@ class _QuizScreenState extends State<QuizScreen> {
   void nextQuestion() {
     if (currentIndex >= widget.questions.length - 1) return;
     setState(() {
-      isSelected = [];
-    });
-    setState(() {
       selectedAnswers = [];
+      isSelected = [];
       currentIndex += 1;
       isAnswerDisabled = false;
       isButtonActive = false;
@@ -201,82 +198,6 @@ class _QuizScreenState extends State<QuizScreen> {
                     : ConfirmButton("Завершить", finishQuiz)
                 : const SizedBox()
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget answerButton(
-    dynamic answer,
-    bool confirmed,
-    bool hasMultipleCorrectAnswers,
-    bool disabled,
-    bool buttonActive,
-    bool isSelected,
-    bool isClicked,
-    Function onClick,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        if (disabled) return;
-        onClick(answer);
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 35,
-          right: 35,
-          bottom: 20,
-        ),
-        child: Container(
-          height: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            color: !hasMultipleCorrectAnswers
-                ? isClicked
-                    ? answer['isCorrectAnswer']
-                        ? const Color(0xFF81FFC2)
-                        : const Color(0xFFFF7888)
-                    : disabled
-                        ? answer['isCorrectAnswer']
-                            ? const Color(0xFF81FFC2)
-                            : const Color(0xFFF9F9FF)
-                        : const Color(0xFFF9F9FF)
-                : confirmed
-                    ? isSelected
-                        ? const Color(0xFF81FFC2)
-                        : const Color(0xFFFF7888)
-                    : const Color(0xFFF9F9FF),
-            border: hasMultipleCorrectAnswers
-                ? isClicked
-                    ? isSelected
-                        ? buttonActive
-                            ? Border.all(
-                                width: 1, color: const Color(0xFF5547F0))
-                            : null
-                        : null
-                    : null
-                : null,
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF4644AA).withOpacity(0.1),
-                offset: const Offset(8, 4),
-                blurRadius: 24,
-              ),
-            ],
-          ),
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Image.asset(
-                  'assets/images/Select.png',
-                  width: 25,
-                  height: 25,
-                ),
-              ),
-              Text(answer['text'])
-            ],
-          ),
         ),
       ),
     );

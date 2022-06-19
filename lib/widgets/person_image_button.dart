@@ -1,43 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/screens/paragraph_screen.dart';
+import 'package:history_kg/screens/person_screen.dart';
 
-class ParagraphImageButton extends StatelessWidget {
+class PersonsImageButton extends StatelessWidget {
   final int id;
-  final String? _buttonText;
+  final String firstName;
+  final String lastName;
+  final String bio;
   final String? imagePath;
 
-  const ParagraphImageButton(this._buttonText, this.id,
+  const PersonsImageButton(this.id, this.firstName, this.lastName, this.bio,
       {Key? key, this.imagePath})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 30),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ParagraphScreen(_buttonText!, id)));
+              builder: (context) => PersonScreen(firstName, lastName, id)));
         },
         child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(22),
+                bottom: Radius.circular(10),
+              ),
               child: Image(
                 image: Image.network(
                   imagePath!,
                 ).image,
-                width: 373,
-                height: 115,
+                width: 129,
+                height: 223,
                 fit: BoxFit.cover,
               ),
             ),
             Positioned(
-              left: -2.5,
+              bottom: 10,
               child: Container(
-                width: 225,
+                width: 161,
                 height: 36,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -54,7 +59,7 @@ class ParagraphImageButton extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 22),
                   child: Text(
-                    _buttonText!,
+                    "$firstName $lastName",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Color(0xFFF9F9FF),

@@ -4,6 +4,7 @@ import 'package:history_kg/widgets/app_bar.dart';
 import 'package:history_kg/widgets/quiz_image_button.dart';
 
 import '../services/quiz_service.dart';
+import '../widgets/failure.dart';
 
 class QuizMenuScreen extends StatefulWidget {
   const QuizMenuScreen({Key? key}) : super(key: key);
@@ -25,44 +26,45 @@ class _QuizScreenState extends State<QuizMenuScreen> {
   }
 
   Future<void> getQuiz() async {
-    try {
-      quizData = await quizService.fetchQuiz();
+    quizData = await quizService.fetchQuiz();
 
-      setState(() {
-        isLoading = false;
-      });
-    } catch (e) {
-      print(e);
-    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? circularIndicator
-        : Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: <Widget>[
-                  const CustomAppBar("Тестирование"),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: quizData.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var quiz = quizData[index];
+    if (isLoading) {
+      return circularIndicator;
+    } else {
+      if (quizData[0] == 'no internet' || quizData[0] == '500') {
+        return Failure(quizData[0], 'Параграфы');
+      }
+      return Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              const CustomAppBar("Тестирование"),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: quizData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var quiz = quizData[index];
 
-                        List questions = quiz['questions'];
-                        return QuizImageButton(
-                          quiz['id'],
-                          quiz['title'],
-                          questions,
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
+                    List questions = quiz['questions'];
+                    return QuizImageButton(
+                      quiz['id'],
+                      quiz['title'],
+                      questions,
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

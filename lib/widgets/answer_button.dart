@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:history_kg/utils/styles.dart';
 
 class AnswerButton extends StatefulWidget {
   final dynamic answer;
   final Function onSelected;
   final int index;
-  bool isSelected;
+  final bool isSelected;
   final bool confirmed;
   final bool hasMultipleCorrectAnswers;
   final bool disabled;
   final bool buttonActive;
   final Function onClick;
-  AnswerButton(
+  const AnswerButton(
       this.answer,
       this.onSelected,
       this.index,
@@ -50,22 +51,22 @@ class _AnswerButtonState extends State<AnswerButton> {
             color: !widget.hasMultipleCorrectAnswers
                 ? widget.isSelected
                     ? widget.answer['isCorrectAnswer']
-                        ? const Color(0xFF81FFC2)
-                        : const Color(0xFFFF7888)
+                        ? correctAnswerColor
+                        : wrongAnswerColor
                     : widget.disabled
                         ? widget.answer['isCorrectAnswer']
-                            ? const Color(0xFF81FFC2)
-                            : const Color(0xFFF9F9FF)
-                        : const Color(0xFFF9F9FF)
+                            ? correctAnswerColor
+                            : primaryAnswerColor
+                        : primaryAnswerColor
                 : widget.confirmed
                     ? widget.isSelected
                         ? widget.answer['isCorrectAnswer']
-                            ? const Color(0xFF81FFC2)
-                            : const Color(0xFFFF7888)
+                            ? correctAnswerColor
+                            : wrongAnswerColor
                         : widget.answer['isCorrectAnswer']
-                            ? const Color(0xFFb2d6e0)
-                            : const Color(0xFFF9F9FF)
-                    : const Color(0xFFF9F9FF),
+                            ? correctUnselectedColor
+                            : primaryAnswerColor
+                    : primaryAnswerColor,
             border: widget.hasMultipleCorrectAnswers
                 ? widget.isSelected
                     ? widget.buttonActive

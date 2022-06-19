@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/screens/home_screen.dart';
-import 'package:history_kg/screens/quiz_menu_screen.dart';
 
 void dialog(BuildContext context, int countCorrect, int quizLength) {
   showDialog(

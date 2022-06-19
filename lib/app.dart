@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_kg/screens/paragraphs_screen.dart';
+import 'package:history_kg/screens/persons_screen.dart';
 import 'package:history_kg/screens/quiz_menu_screen.dart';
 
 import 'screens/home_screen.dart';
@@ -22,7 +23,8 @@ class _MyAppState extends State<MyApp> {
       routes: <String, WidgetBuilder>{
         "/home": (BuildContext context) => const HomeScreen(),
         "/paragraphs": (BuildContext context) => const ParagraphsScreen(),
-        "/quizMenu": (BuildContext context) => const QuizMenuScreen()
+        "/quizMenu": (BuildContext context) => const QuizMenuScreen(),
+        "/persons": (BuildContext context) => const PersonsScreen(),
       },
     );
   }

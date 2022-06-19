@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:history_kg/utils/constans.dart';
 import 'package:http/http.dart' as http;
 
-class ParagraphsService {
-  Future<List<dynamic>> fetchParagraphs() async {
+class PersonsService {
+  Future<List<dynamic>> fetchPersons() async {
     try {
-      http.Response response = await http.get(Uri.parse(API_PARAGRAPHS));
+      http.Response response = await http.get(Uri.parse(API_PERSONS));
 
       return jsonDecode(response.body);
     } on SocketException {
@@ -17,8 +17,8 @@ class ParagraphsService {
     }
   }
 
-  Future<Map<String, dynamic>> fetchParagraphById(int id) async {
-    http.Response response = await http.get(Uri.parse("$API_PARAGRAPHS/$id"));
+  Future<Map<String, dynamic>> fetchPersonById(int id) async {
+    http.Response response = await http.get(Uri.parse("$API_PERSONS/$id"));
     return jsonDecode(response.body);
   }
 }
