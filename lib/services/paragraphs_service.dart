@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:history_kg/utils/constans.dart';
 import 'package:http/http.dart' as http;
+
+import '../presentation/utils/constans.dart';
 
 class ParagraphsService {
   Future<List<dynamic>> fetchParagraphs() async {

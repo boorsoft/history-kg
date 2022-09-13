@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:history_kg/presentation/screens/home_screen.dart';
+import 'package:history_kg/presentation/screens/persons_screen.dart';
+import 'package:history_kg/presentation/screens/quiz_menu_screen.dart';
 import 'package:history_kg/screens/paragraphs_screen.dart';
-import 'package:history_kg/screens/persons_screen.dart';
-import 'package:history_kg/screens/quiz_menu_screen.dart';
-
-import 'screens/home_screen.dart';
-import 'screens/paragraphs_screen.dart';
+import '../screens/paragraphs_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
