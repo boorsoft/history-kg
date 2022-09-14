@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/utils/styles.dart';
-import 'package:history_kg/widgets/app_bar.dart';
-import 'package:history_kg/widgets/quiz_image_button.dart';
+import 'package:history_kg/data/api/models/api_quiz.dart';
 
-import '../services/quiz_service.dart';
-import '../widgets/failure.dart';
+import '../../services/quiz_service.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/quiz_image_button.dart';
 
 class QuizMenuScreen extends StatefulWidget {
   const QuizMenuScreen({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class QuizMenuScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizMenuScreen> {
-  List quizData = [];
+  late ApiQuiz quizData;
   bool isLoading = true;
 
   QuizService quizService = QuizService();
@@ -35,36 +34,35 @@ class _QuizScreenState extends State<QuizMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return circularIndicator;
-    } else {
-      if (quizData[0] == 'no internet' || quizData[0] == '500') {
-        return Failure(quizData[0], 'Параграфы');
-      }
-      return Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              const CustomAppBar("Тестирование"),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: quizData.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    var quiz = quizData[index];
+    // if (isLoading) {
+    //   return circularIndicator;
+    // } else {
+    //   if (quizData[0] == 'no internet' || quizData[0] == '500') {
+    //     return Failure(quizData[0], 'Параграфы');
+    //   }
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            const CustomAppBar("Тестирование"),
+            Expanded(
+              child: ListView.builder(
+                itemCount: quizData.id,
+                itemBuilder: (BuildContext context, int index) {
+                  // var quizData = quizData[index];
 
-                    List questions = quiz['questions'];
-                    return QuizImageButton(
-                      quiz['id'],
-                      quiz['title'],
-                      questions,
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
+                  List questions = quizData.questions;
+                  return QuizImageButton(
+                    quizData.id,
+                    quizData.title,
+                    quizData.questions,
+                  );
+                },
+              ),
+            )
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }

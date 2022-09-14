@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/screens/quiz_screen.dart';
+import 'package:history_kg/data/api/models/api_quiz.dart';
+
+import '../screens/quiz_screen.dart';
 
 class QuizImageButton extends StatelessWidget {
   final int id;
   final String title;
-  final List questions;
+  final List<ApiQuestions> questions;
   const QuizImageButton(this.id, this.title, this.questions, {Key? key})
       : super(key: key);
 

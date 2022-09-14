@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/widgets/failure.dart';
 
 TextStyle appBarTextStyle = const TextStyle(
   color: Color(0xFF28254A),

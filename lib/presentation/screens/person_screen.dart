@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:history_kg/services/persons_service.dart';
-import 'package:history_kg/utils/styles.dart';
-import 'package:history_kg/widgets/app_bar.dart';
+
+
+import '../utils/styles.dart';
+import '../widgets/app_bar.dart';
 
 class PersonScreen extends StatefulWidget {
   final String firstName;

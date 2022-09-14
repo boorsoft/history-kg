@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/screens/person_screen.dart';
+
+import '../screens/person_screen.dart';
 
 class PersonsImageButton extends StatelessWidget {
   final int id;

@@ -13,10 +13,28 @@ class ApiBook {
     required this.fileName,
   });
 
-  ApiBook.fromApi(Map<String, dynamic> map)
-      : id = map['id'],
-        title = map['title'],
-        author = map['author'],
-        nameCity = map['city'],
-        fileName = map['fileName'];
+  static ApiBook fromApi(Map<String, dynamic> map) {
+    return ApiBook(
+      id: map['id'],
+      title: map['title'],
+      author: map['author'],
+      nameCity: map['city'],
+      fileName: map['fileName'],
+    );
+  }
+
+  static List<ApiBook> fromListApi(List<Map<String, dynamic>> map) {
+    List<ApiBook> books = map
+        .map(
+          (book) => ApiBook(
+            id: book['id'],
+            title: book['title'],
+            author: book['author'],
+            nameCity: book['nameCity'],
+            fileName: book['fileName'],
+          ),
+        )
+        .toList();
+    return books;
+  }
 }

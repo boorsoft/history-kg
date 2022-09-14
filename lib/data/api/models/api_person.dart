@@ -15,11 +15,30 @@ class ApiPerson {
     required this.subjectId,
   });
 
-  ApiPerson.fromApi(Map<String, dynamic> map)
-      : id = map['id'],
-        firstName = map['firstName'],
-        lastName = map['lastName'],
-        bio = map['bio'],
-        image = map['image'],
-        subjectId = map['subjectId'];
+  static List<ApiPerson> fromListApi(List<Map<String, dynamic>> map) {
+    List<ApiPerson> persons = map
+        .map(
+          (person) => ApiPerson(
+            id: person['id'],
+            firstName: person['firstName'],
+            lastName: person['lastName'],
+            bio: person['bio'],
+            image: person['image'],
+            subjectId: person['subjectId'],
+          ),
+        )
+        .toList();
+    return persons;
+  }
+
+  static ApiPerson fromApi(Map<String, dynamic> map) {
+    return ApiPerson(
+      id: map['id'],
+      firstName: map['firstName'],
+      lastName: map['lastName'],
+      bio: map['bio'],
+      image: map['image'],
+      subjectId: map['subjectId'],
+    );
+  }
 }

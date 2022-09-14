@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
 class ApiQuiz {
-  final String id;
+  final num id;
   final String title;
-  final String subjectId;
+  final num subjectId;
   final List<ApiQuestions> questions;
 
   ApiQuiz({
@@ -13,17 +11,42 @@ class ApiQuiz {
     required this.questions,
   });
 
-  ApiQuiz.fromApi(Map<String, dynamic> map)
-      : id = map['id'],
-        title = map['title'],
-        subjectId = map['subjectId'],
-        questions = map['questions'];
+  static List<ApiQuiz> fromListApi(List<dynamic> map) {
+    List<ApiQuiz> quizes = map
+        .map(
+          (e) => ApiQuiz(
+            id: e['id'],
+            title: e['title'],
+            subjectId: e['subjectId'],
+            questions: List<ApiQuestions>.from(
+              e['questions'].map(
+                (question) => ApiQuestions.fromListApi(question),
+              ),
+            ),
+          ),
+        )
+        .toList();
+    return quizes;
+  }
+
+  static ApiQuiz fromApi(Map<String, dynamic> map) {
+    return ApiQuiz(
+      id: map['id'],
+      title: map['title'],
+      subjectId: map['subjectId'],
+      questions: List<ApiQuestions>.from(
+        map['questions'].map(
+          (question) => ApiQuestions.fromListApi(question),
+        ),
+      ),
+    );
+  }
 }
 
 class ApiQuestions {
-  final String id;
+  final num id;
   final String text;
-  final String quizId;
+  final num quizId;
   final List<ApiAnswer> answers;
 
   ApiQuestions({
@@ -33,17 +56,18 @@ class ApiQuestions {
     required this.answers,
   });
 
-  ApiQuestions.fromApi(Map<String, dynamic> map)
+  ApiQuestions.fromListApi(Map<String, dynamic> map)
       : id = map['id'],
         text = map['text'],
         quizId = map['quizId'],
-        answers = map['answers'];
+        answers = List<ApiAnswer>.from(
+            map['answers'].map((e) => ApiAnswer.fromApi(e)));
 }
 
 class ApiAnswer {
-  final String id;
+  final num id;
   final String text;
-  final String questionId;
+  final num questionId;
   final bool isCorrectAnswer;
 
   ApiAnswer({

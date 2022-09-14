@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/utils/styles.dart';
+import 'package:history_kg/data/api/models/api_quiz.dart';
+
+import '../utils/styles.dart';
 
 class AnswerButton extends StatefulWidget {
-  final dynamic answer;
+  final ApiAnswer answer;
   final Function onSelected;
   final int index;
   final bool isSelected;
@@ -50,20 +52,20 @@ class _AnswerButtonState extends State<AnswerButton> {
             borderRadius: BorderRadius.circular(18),
             color: !widget.hasMultipleCorrectAnswers
                 ? widget.isSelected
-                    ? widget.answer['isCorrectAnswer']
+                    ? widget.answer.isCorrectAnswer
                         ? correctAnswerColor
                         : wrongAnswerColor
                     : widget.disabled
-                        ? widget.answer['isCorrectAnswer']
+                        ? widget.answer.isCorrectAnswer
                             ? correctAnswerColor
                             : primaryAnswerColor
                         : primaryAnswerColor
                 : widget.confirmed
                     ? widget.isSelected
-                        ? widget.answer['isCorrectAnswer']
+                        ? widget.answer.isCorrectAnswer
                             ? correctAnswerColor
                             : wrongAnswerColor
-                        : widget.answer['isCorrectAnswer']
+                        : widget.answer.isCorrectAnswer
                             ? correctUnselectedColor
                             : primaryAnswerColor
                     : primaryAnswerColor,
@@ -92,7 +94,7 @@ class _AnswerButtonState extends State<AnswerButton> {
                   height: 25,
                 ),
               ),
-              Text(widget.answer['text'])
+              Text(widget.answer.text)
             ],
           ),
         ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/widgets/answer_button.dart';
-import 'package:history_kg/widgets/app_bar.dart';
-import 'package:history_kg/widgets/confirm_button.dart';
-import 'package:history_kg/widgets/result_dialog.dart';
+import 'package:history_kg/data/api/models/api_quiz.dart';
+
+import '../widgets/answer_button.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/confirm_button.dart';
+import '../widgets/result_dialog.dart';
 
 class QuizScreen extends StatefulWidget {
-  final List questions;
+  final List<ApiQuestions> questions;
   const QuizScreen(this.questions, {Key? key}) : super(key: key);
 
   @override
@@ -31,10 +33,10 @@ class _QuizScreenState extends State<QuizScreen> {
 
   bool checkHasMultipleCorrectAnswers() {
     int correctCount = 0;
-    List answers = widget.questions[currentIndex]['answers'];
+    List<ApiAnswer> answers = widget.questions[currentIndex].answers;
 
     for (var answer in answers) {
-      if (answer['isCorrectAnswer']) correctCount += 1;
+      if (answer.isCorrectAnswer) correctCount += 1;
       isSelected.add(false);
     }
 
@@ -93,7 +95,7 @@ class _QuizScreenState extends State<QuizScreen> {
       isButtonActive = true;
     });
     if (!hasMultipleCorrectAnswers) {
-      if (answer['isCorrectAnswer']) {
+      if (answer.isCorrectAnswer) {
         setState(() {
           correctAnswersCount += 1;
         });
@@ -143,7 +145,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       ),
                     ],
                   ),
-                  child: Text(widget.questions[currentIndex]['text']),
+                  child: Text(widget.questions[currentIndex].text),
                 ),
                 Positioned(
                   top: 172,
@@ -173,9 +175,9 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: widget.questions[currentIndex]['answers'].length,
+                itemCount: widget.questions[currentIndex].answers.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var answers = widget.questions[currentIndex]['answers'];
+                  var answers = widget.questions[currentIndex].answers;
                   return AnswerButton(
                     answers[index],
                     onSelect,

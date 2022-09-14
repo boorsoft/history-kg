@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:history_kg/services/paragraphs_service.dart';
-import 'package:history_kg/utils/styles.dart';
-import 'package:history_kg/widgets/app_bar.dart';
-import 'package:history_kg/widgets/failure.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
+import '../utils/styles.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/failure.dart';
 import '../widgets/paragraph_image_button.dart';
 
 class ParagraphsScreen extends StatefulWidget {
@@ -30,16 +29,16 @@ class ParagraphsState extends State<ParagraphsScreen> {
   Future<void> getParagraphs() async {
     paragraphsData = await paragraphsService.fetchParagraphs();
 
-    await Future.wait(paragraphsData
-        .map((data) => cachedImage(context, data['image']))
-        .toList());
+    // await Future.wait(paragraphsData
+    //     .map((data) => cachedImage(context, data['image']))
+    //     .toList());
     setState(() {
       isLoading = false;
     });
   }
 
-  Future cachedImage(BuildContext context, String imageUrl) =>
-      precacheImage(CachedNetworkImageProvider(imageUrl), context);
+  // Future cachedImage(BuildContext context, String imageUrl) =>
+  //     precacheImage(CachedNetworkImageProvider(imageUrl), context);
 
   @override
   Widget build(BuildContext context) {

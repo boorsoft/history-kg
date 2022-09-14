@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/screens/paragraph_screen.dart';
+
+import '../screens/paragraph_screen.dart';
 
 class ParagraphImageButton extends StatelessWidget {
   final int id;

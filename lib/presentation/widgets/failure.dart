@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/utils/styles.dart';
-import 'package:history_kg/widgets/app_bar.dart';
+import 'package:history_kg/presentation/widgets/app_bar.dart';
+
+import '../utils/styles.dart';
 
 class Failure extends StatelessWidget {
   final String message;
