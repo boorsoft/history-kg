@@ -1,10 +1,10 @@
 class ApiPerson {
-  final String id;
+  final num id;
   final String firstName;
   final String lastName;
   final String bio;
   final String image;
-  final String subjectId;
+  final num subjectId;
 
   ApiPerson({
     required this.id,

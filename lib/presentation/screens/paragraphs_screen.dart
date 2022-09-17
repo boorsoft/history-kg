@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/services/paragraphs_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
 
-import '../utils/styles.dart';
 import '../widgets/app_bar.dart';
-import '../widgets/failure.dart';
 import '../widgets/paragraph_image_button.dart';
 
 class ParagraphsScreen extends StatefulWidget {
@@ -14,66 +13,54 @@ class ParagraphsScreen extends StatefulWidget {
 }
 
 class ParagraphsState extends State<ParagraphsScreen> {
-  List<dynamic> paragraphsData = [];
-  bool isLoading = true;
-
-  ParagraphsService paragraphsService = ParagraphsService();
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => getParagraphs());
-    getParagraphs();
   }
-
-  Future<void> getParagraphs() async {
-    paragraphsData = await paragraphsService.fetchParagraphs();
-
-    // await Future.wait(paragraphsData
-    //     .map((data) => cachedImage(context, data['image']))
-    //     .toList());
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  // Future cachedImage(BuildContext context, String imageUrl) =>
-  //     precacheImage(CachedNetworkImageProvider(imageUrl), context);
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return circularIndicator;
-    } else {
-      if (paragraphsData[0] == 'no internet' || paragraphsData[0] == '500') {
-        return Failure(paragraphsData[0], 'Параграфы');
-      }
-      return Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              const CustomAppBar('Параграфы'),
-              Expanded(
-                child: ListView.separated(
-                    itemCount: paragraphsData.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(
-                          color: Colors.white,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            const CustomAppBar('Параграфы'),
+            Expanded(
+              child: BlocBuilder<BookBloc, BookState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      if (state is BookLoadingState)
+                        const Center(
+                          child: CircularProgressIndicator(),
                         ),
-                    itemBuilder: (BuildContext context, int index) {
-                      var paragraph = paragraphsData[index];
+                      if (state is BookLoadedState)
+                        ListView.separated(
+                          itemCount: state.books.length,
+                          shrinkWrap: true,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(
+                            color: Colors.white,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            var book = state.books[index];
 
-                      return ParagraphImageButton(
-                        paragraph['title'],
-                        paragraph['id'],
-                        imagePath: paragraph['image'],
-                      );
-                    }),
-              )
-            ],
-          ),
+                            return ParagraphImageButton(
+                              book.title,
+                              book.id,
+                              imagePath:
+                                  "https://cdn.discordapp.com/avatars/548904505471926292/ca366fbb3dcd6c81f9c1fc547679df3d.webp?size=100",
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                },
+              ),
+            )
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }

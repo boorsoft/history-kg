@@ -13,7 +13,7 @@ class BookMapper {
     );
   }
 
-  static List<Book> fromListApi(List<ApiBook> map) {
+  static List<Book> fromListJSON(List<ApiBook> map) {
     List<Book> books = map
         .map(
           (book) => Book(

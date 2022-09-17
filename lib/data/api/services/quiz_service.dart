@@ -7,7 +7,6 @@ class QuizService {
 
   Future<List<ApiQuiz>> fetchQuiz() async {
     final response = await _dio.get(API_QUIZ);
-    // print(jsonDecode(response.body));
     return ApiQuiz.fromListApi(response.data);
 
     // } on SocketException {

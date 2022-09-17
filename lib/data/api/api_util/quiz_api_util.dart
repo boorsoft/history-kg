@@ -3,10 +3,10 @@ import '../../../domain/models/quiz.dart';
 import '../../mappers/quiz_mapper.dart';
 import '../services/quiz_service.dart';
 
-class QuizApiUntil {
+class QuizApiUtil {
   final QuizService quizService;
 
-  QuizApiUntil({required this.quizService});
+  QuizApiUtil({required this.quizService});
 
   Future<List<Quiz>> getQuizes() async {
     final quiz = await quizService.fetchQuiz();
@@ -17,7 +17,6 @@ class QuizApiUntil {
           as List<ApiAnswer>,
     );
   }
-  //
 
   Future<Quiz> getQuizById(int id) async {
     final quiz = await quizService.fetchQuizById(id);

@@ -1,19 +1,19 @@
 import '../../domain/models/book.dart';
 import '../../domain/repository/books_repository.dart';
-import '../api/api_until/book_api_until.dart';
+import '../api/api_util/book_api_util.dart';
 
 class BookDataRepository extends BooksRepository {
-  final BookApiUntil bookApiUntil;
+  final BookApiUtil bookApiUtil;
 
-  BookDataRepository({required this.bookApiUntil});
+  BookDataRepository({required this.bookApiUtil});
 
   @override
   Future<List<Book>> getBooks() {
-    return bookApiUntil.getBooks();
+    return bookApiUtil.getBooks();
   }
 
   @override
   Future<Book> getBookById({required int bookId}) {
-    return bookApiUntil.getBookById(bookId);
+    return bookApiUtil.getBookById(bookId);
   }
 }

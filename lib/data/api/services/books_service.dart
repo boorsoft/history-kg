@@ -20,6 +20,7 @@ class BooksService {
 
   Future<ApiBook> fetchBookById(int id) async {
     final response = await _dio.get("$API_BOOKS/$id");
+
     return ApiBook.fromApi(response.data);
   }
 }

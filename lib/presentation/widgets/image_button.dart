@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
 
 class ImageButton extends StatelessWidget {
   final String? _buttonText;
@@ -20,6 +22,7 @@ class ImageButton extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed(_route!);
+              context.read<BookBloc>().add(GetBooksEvent());
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14.0),

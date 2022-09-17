@@ -6,8 +6,8 @@ import '../models/api_person.dart';
 class PersonsService {
   final Dio _dio = Dio();
 
-  Future<List<ApiPerson>> fetchParagraphs() async {
-    final response = await _dio.get(API_PARAGRAPHS);
+  Future<List<ApiPerson>> fetchPersons() async {
+    final response = await _dio.get(API_PERSONS);
 
     return ApiPerson.fromListApi(response.data);
 
@@ -18,8 +18,8 @@ class PersonsService {
     // }
   }
 
-  Future<ApiPerson> fetchParagraphById(int id) async {
-    final response = await _dio.get("$API_PARAGRAPHS/$id");
+  Future<ApiPerson> fetchPersonById(int id) async {
+    final response = await _dio.get("$API_PERSONS/$id");
     return ApiPerson.fromApi(response.data);
   }
 }

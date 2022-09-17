@@ -2,10 +2,10 @@ import '../../../domain/models/person.dart';
 import '../../mappers/person_mapper.dart';
 import '../services/persons_service.dart';
 
-class PersonApiUntil {
+class PersonApiUtil {
   final PersonsService personsService;
 
-  PersonApiUntil({required this.personsService});
+  PersonApiUtil({required this.personsService});
 
   Future<List<Person>> getPersons() async {
     final person = await personsService.fetchPersons();

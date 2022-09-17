@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../screens/paragraph_screen.dart';
-
 class ParagraphImageButton extends StatelessWidget {
   final int id;
   final String? _buttonText;
@@ -17,8 +15,8 @@ class ParagraphImageButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ParagraphScreen(_buttonText!, id)));
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => ParagraphScreen(_buttonText!, id)));
         },
         child: Stack(
           clipBehavior: Clip.none,

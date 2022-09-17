@@ -1,6 +1,6 @@
 import '../models/book.dart';
 
-abstract class PersonsRepository {
+abstract class BooksRepository {
   Future<List<Book>> getBooks();
-  Future<Book> getBook({required int bookId});
+  Future<Book> getBookById({required int bookId});
 }

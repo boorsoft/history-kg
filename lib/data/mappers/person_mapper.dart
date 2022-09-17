@@ -1,7 +1,7 @@
 import 'package:history_kg/data/api/models/api_person.dart';
 import 'package:history_kg/domain/models/person.dart';
 
-class PerosnMapper {
+class PersonMapper {
   static Person fromJSON(ApiPerson apiPerson) {
     return Person(
       id: int.parse(apiPerson.id.toString()),
@@ -13,7 +13,7 @@ class PerosnMapper {
     );
   }
 
-  static List<Person> fromListApi(List<ApiPerson> apiPerson) {
+  static List<Person> fromListJSON(List<ApiPerson> apiPerson) {
     List<Person> persons = apiPerson
         .map(
           (person) => Person(

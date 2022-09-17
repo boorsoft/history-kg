@@ -1,5 +1,5 @@
 class ApiBook {
-  final String id;
+  final num id;
   final String title;
   final String author;
   final String nameCity;
@@ -23,14 +23,14 @@ class ApiBook {
     );
   }
 
-  static List<ApiBook> fromListApi(List<Map<String, dynamic>> map) {
+  static List<ApiBook> fromListApi(List<dynamic> map) {
     List<ApiBook> books = map
         .map(
           (book) => ApiBook(
             id: book['id'],
             title: book['title'],
             author: book['author'],
-            nameCity: book['nameCity'],
+            nameCity: book['city'],
             fileName: book['fileName'],
           ),
         )

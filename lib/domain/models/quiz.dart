@@ -1,7 +1,7 @@
 class Quiz {
   final int id;
   final String title;
-  final String subjectId;
+  final int subjectId;
   final List<Questions> questions;
 
   Quiz({
