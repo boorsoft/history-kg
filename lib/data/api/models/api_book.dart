@@ -2,14 +2,16 @@ class ApiBook {
   final num id;
   final String title;
   final String author;
-  final String nameCity;
+  final String city;
+  final num year;
   final String fileName;
 
   ApiBook({
     required this.id,
     required this.title,
     required this.author,
-    required this.nameCity,
+    required this.city,
+    required this.year,
     required this.fileName,
   });
 
@@ -18,7 +20,8 @@ class ApiBook {
       id: map['id'],
       title: map['title'],
       author: map['author'],
-      nameCity: map['city'],
+      city: map['city'],
+      year: map['year'],
       fileName: map['fileName'],
     );
   }
@@ -30,7 +33,8 @@ class ApiBook {
             id: book['id'],
             title: book['title'],
             author: book['author'],
-            nameCity: book['city'],
+            city: book['city'],
+            year: book['year'],
             fileName: book['fileName'],
           ),
         )

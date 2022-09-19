@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:history_kg/presentation/screens/books_screen.dart';
+import 'package:history_kg/presentation/screens/persons_screen.dart';
+import 'package:history_kg/presentation/utils/styles.dart';
+import 'package:history_kg/presentation/widgets/see_all.dart';
 
 import '../widgets/app_bar.dart';
-import '../widgets/image_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,37 +18,37 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: backgroundColor,
         body: Column(
           children: <Widget>[
             const CustomAppBar(
               "История Кыргызстана",
               isHome: true,
             ),
-            Expanded(
+            GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: SingleChildScrollView(
-                child: Column(
-                  children: const <Widget>[
-                    ImageButton(
-                      "Параграфы",
-                      "assets/images/home-pic1.jpg",
-                      "/paragraphs",
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const <Widget>[
+                        SeeAll("Книги", '/booksAllScreen'),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        BooksScreen(),
+                        SeeAll("Исторические личности", '/personsAllScreen'),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        PersonsScreen(),
+                      ],
                     ),
-                    ImageButton(
-                      "Личности",
-                      "assets/images/home-pic2.jpg",
-                      "/persons",
-                    ),
-                    ImageButton(
-                      "Тестирование",
-                      "assets/images/home-pic3.jpg",
-                      "/quizMenu",
-                    ),
-                    ImageButton(
-                      "О прилложении",
-                      "assets/images/home-pic4.jpg",
-                      "",
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

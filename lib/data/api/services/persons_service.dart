@@ -8,7 +8,6 @@ class PersonsService {
 
   Future<List<ApiPerson>> fetchPersons() async {
     final response = await _dio.get(API_PERSONS);
-
     return ApiPerson.fromListApi(response.data);
 
     // on SocketException {

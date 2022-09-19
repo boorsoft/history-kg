@@ -8,7 +8,8 @@ class BookMapper {
       id: int.parse(apiBook.id.toString()),
       title: apiBook.title,
       author: apiBook.author,
-      nameCity: apiBook.nameCity,
+      city: apiBook.city,
+      year: int.parse(apiBook.year.toString()),
       fileName: apiBook.fileName,
     );
   }
@@ -20,7 +21,8 @@ class BookMapper {
             id: int.parse(book.id.toString()),
             title: book.title,
             author: book.author,
-            nameCity: book.nameCity,
+            city: book.city,
+            year: int.parse(book.year.toString()),
             fileName: book.fileName,
           ),
         )

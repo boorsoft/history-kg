@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:history_kg/internal/dependencies/repository_modules/book_repository_module.dart';
+import 'package:history_kg/presentation/screens/books_all_screen.dart';
 import 'package:history_kg/presentation/screens/home_screen.dart';
-import 'package:history_kg/presentation/screens/persons_screen.dart';
-import 'package:history_kg/presentation/screens/quiz_menu_screen.dart';
 import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
+import 'package:history_kg/presentation/state/persons_bloc/persons_bloc.dart';
+import 'package:history_kg/presentation/utils/styles.dart';
 
-import '../presentation/screens/paragraphs_screen.dart';
+import '../presentation/screens/persons_all_screen.dart';
+import 'dependencies/repository_modules/person_repository_module.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -21,19 +24,31 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) =>
-                BookBloc(BookRepositoryModule.bookRepository()))
+          create: (context) => BookBloc(BookRepositoryModule.bookRepository())
+            ..add(GetBooksEvent()),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) =>
+              PersonsBloc(PersonRepositoryModule.personApiUtil())
+                ..add(GetPersonsEvent()),
+          lazy: false,
+        )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'RobotoFlex'),
-        home: const HomeScreen(),
-        routes: <String, WidgetBuilder>{
-          "/home": (BuildContext context) => const HomeScreen(),
-          "/paragraphs": (BuildContext context) => const ParagraphsScreen(),
-          // "/quizMenu": (BuildContext context) => const QuizMenuScreen(),
-          // "/persons": (BuildContext context) => const PersonsScreen(),
-        },
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(statusBarColor: accentColor),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme:
+              ThemeData(fontFamily: 'Roboto', backgroundColor: backgroundColor),
+          initialRoute: "/home",
+          routes: <String, WidgetBuilder>{
+            "/home": (BuildContext context) => const HomeScreen(),
+            "/booksAllScreen": (BuildContext context) => const BooksAllScreen(),
+            "/personsAllScreen": (BuildContext context) =>
+                const PersonsAllScreen(),
+          },
+        ),
       ),
     );
   }

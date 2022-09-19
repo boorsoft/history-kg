@@ -8,7 +8,6 @@ class BooksService {
 
   Future<List<ApiBook>> fetchBooks() async {
     final response = await _dio.get(API_BOOKS);
-
     return ApiBook.fromListApi(response.data);
 
     // on SocketException {

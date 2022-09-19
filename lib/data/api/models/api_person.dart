@@ -15,7 +15,7 @@ class ApiPerson {
     required this.subjectId,
   });
 
-  static List<ApiPerson> fromListApi(List<Map<String, dynamic>> map) {
+  static List<ApiPerson> fromListApi(List<dynamic> map) {
     List<ApiPerson> persons = map
         .map(
           (person) => ApiPerson(

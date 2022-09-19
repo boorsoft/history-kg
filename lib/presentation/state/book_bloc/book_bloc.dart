@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:meta/meta.dart';
 
 import '../../../domain/models/book.dart';
