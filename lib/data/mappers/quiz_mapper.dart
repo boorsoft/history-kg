@@ -11,14 +11,12 @@ class QuizMapper {
       id: int.parse(apiQuiz.id.toString()),
       title: apiQuiz.title,
       subjectId: int.parse(apiQuiz.subjectId.toString()),
-      questions: QuestionsMapper.fromListMap(apiQuestions, apiAnswers),
+      questions: QuestionsMapper.fromListMap(apiQuestions),
     );
   }
 
   static List<Quiz> fromListJSON(
     List<ApiQuiz> apiQuiz,
-    List<ApiQuestions> apiQuestions,
-    List<ApiAnswer> apiAnswers,
   ) {
     return apiQuiz
         .map(
@@ -26,7 +24,7 @@ class QuizMapper {
             id: int.parse(quiz.id.toString()),
             title: quiz.title,
             subjectId: int.parse(quiz.subjectId.toString()),
-            questions: QuestionsMapper.fromListMap(apiQuestions, apiAnswers),
+            questions: QuestionsMapper.fromListMap(quiz.questions),
           ),
         )
         .toList();
@@ -34,15 +32,14 @@ class QuizMapper {
 }
 
 class QuestionsMapper {
-  static List<Questions> fromListMap(
-      List<ApiQuestions> apiQuestions, List<ApiAnswer> apiAnswers) {
+  static List<Questions> fromListMap(List<ApiQuestions> apiQuestions) {
     List<Questions> questions = apiQuestions
         .map(
           (question) => Questions(
             id: int.parse(question.id.toString()),
             text: question.text,
             quizId: int.parse(question.quizId.toString()),
-            answers: AnswerMapper.fromListMap(apiAnswers),
+            answers: AnswerMapper.fromListMap(question.answers),
           ),
         )
         .toList();

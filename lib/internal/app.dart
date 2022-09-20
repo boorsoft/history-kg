@@ -6,10 +6,13 @@ import 'package:history_kg/presentation/screens/books_all_screen.dart';
 import 'package:history_kg/presentation/screens/home_screen.dart';
 import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
 import 'package:history_kg/presentation/state/persons_bloc/persons_bloc.dart';
+import 'package:history_kg/presentation/state/quiz_bloc/quiz_bloc.dart';
 import 'package:history_kg/presentation/utils/styles.dart';
 
 import '../presentation/screens/persons_all_screen.dart';
+import '../presentation/screens/quiz_all_screen.dart';
 import 'dependencies/repository_modules/person_repository_module.dart';
+import 'dependencies/repository_modules/quiz_repository_module.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,7 +36,12 @@ class _MyAppState extends State<MyApp> {
               PersonsBloc(PersonRepositoryModule.personApiUtil())
                 ..add(GetPersonsEvent()),
           lazy: false,
-        )
+        ),
+        BlocProvider(
+          create: (context) =>
+              QuizBloc(QuizRepositoryModule.quizApiUtil())..add(GetQuizEvent()),
+          lazy: false,
+        ),
       ],
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(statusBarColor: accentColor),
@@ -47,6 +55,7 @@ class _MyAppState extends State<MyApp> {
             "/booksAllScreen": (BuildContext context) => const BooksAllScreen(),
             "/personsAllScreen": (BuildContext context) =>
                 const PersonsAllScreen(),
+            "/quizAllScreen": (context) => const QuizAllScreen(),
           },
         ),
       ),

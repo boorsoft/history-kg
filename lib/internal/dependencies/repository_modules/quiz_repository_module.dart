@@ -1,10 +1,10 @@
 import '../../../data/repository/quiz_data_repository.dart';
 import '../util_modules/quiz_api_module.dart';
 
-class PersonRepositoryModule {
+class QuizRepositoryModule {
   static QuizDataRepository? _quizDataRepository;
 
-  static QuizDataRepository bookApiUtil() {
+  static QuizDataRepository quizApiUtil() {
     _quizDataRepository ??=
         QuizDataRepository(quizApiUtil: QuizApiModule.quizApiUtil());
     return _quizDataRepository!;
