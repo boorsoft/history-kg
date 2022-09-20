@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:history_kg/data/api/models/api_quiz.dart';
 
+import '../../domain/models/quiz.dart';
 import '../utils/styles.dart';
 
 class AnswerButton extends StatefulWidget {
-  final ApiAnswer answer;
+  final Answer answer;
   final Function onSelected;
   final int index;
   final bool isSelected;

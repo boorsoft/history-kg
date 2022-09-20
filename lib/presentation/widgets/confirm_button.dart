@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:history_kg/presentation/utils/styles.dart';
 
 class ConfirmButton extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class ConfirmButton extends StatelessWidget {
           height: 45,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            color: const Color(0xFF5547F0),
+            color: accentColor,
           ),
           child: Text(
             text,

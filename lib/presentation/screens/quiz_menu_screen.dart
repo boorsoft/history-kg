@@ -1,69 +1,46 @@
-// import 'package:flutter/material.dart';
-// import 'package:history_kg/data/api/models/api_quiz.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '../../services/quiz_service.dart';
+import '../state/quiz_bloc/quiz_bloc.dart';
+import '../utils/styles.dart';
+import '../widgets/quiz_image_button.dart';
 
-// import '../widgets/app_bar.dart';
-// import '../widgets/quiz_image_button.dart';
+class QuizMenuScreen extends StatelessWidget {
+  const QuizMenuScreen({Key? key}) : super(key: key);
 
-// class QuizMenuScreen extends StatefulWidget {
-//   const QuizMenuScreen({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: BlocBuilder<QuizBloc, QuizState>(
+        builder: (context, state) {
+          if (state is QuizLoadingState) {
+            SizedBox(
+              height: 230,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: accentColor,
+                ),
+              ),
+            );
+          }
+          if (state is QuizLoadedState) {
+            return SizedBox(
+              height: 120,
+              child: ListView.builder(
+                itemCount: state.quizes.length < 3 ? state.quizes.length : 3,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  var quiz = state.quizes[index];
 
-//   @override
-//   State<QuizMenuScreen> createState() => _QuizScreenState();
-// }
-
-// class _QuizScreenState extends State<QuizMenuScreen> {
-//   late ApiQuiz quizData;
-//   bool isLoading = true;
-
-//   QuizService quizService = QuizService();
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     getQuiz();
-//   }
-
-//   Future<void> getQuiz() async {
-//     quizData = await quizService.fetchQuiz();
-
-//     setState(() {
-//       isLoading = false;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // if (isLoading) {
-//     //   return circularIndicator;
-//     // } else {
-//     //   if (quizData[0] == 'no internet' || quizData[0] == '500') {
-//     //     return Failure(quizData[0], 'Параграфы');
-//     //   }
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Column(
-//           children: <Widget>[
-//             const CustomAppBar("Тестирование"),
-//             Expanded(
-//               child: ListView.builder(
-//                 itemCount: quizData.id,
-//                 itemBuilder: (BuildContext context, int index) {
-//                   // var quizData = quizData[index];
-
-//                   List questions = quizData.questions;
-//                   return QuizImageButton(
-//                     quizData.id,
-//                     quizData.title,
-//                     quizData.questions,
-//                   );
-//                 },
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+                  return QuizImageButton(quiz);
+                },
+              ),
+            );
+          }
+          return const SizedBox();
+        },
+      ),
+    );
+  }
+}

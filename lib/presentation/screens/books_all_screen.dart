@@ -13,6 +13,7 @@ class BooksAllScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
+      resizeToAvoidBottomInset: false,
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
           return GestureDetector(

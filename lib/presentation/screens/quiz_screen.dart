@@ -1,13 +1,15 @@
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:history_kg/data/api/models/api_quiz.dart';
+import 'package:history_kg/presentation/utils/styles.dart';
 
+import '../../domain/models/quiz.dart';
 import '../widgets/answer_button.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/confirm_button.dart';
 import '../widgets/result_dialog.dart';
 
 class QuizScreen extends StatefulWidget {
-  final List<ApiQuestions> questions;
+  final List<Questions> questions;
   const QuizScreen(this.questions, {Key? key}) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class _QuizScreenState extends State<QuizScreen> {
   bool isAnswerDisabled = false;
   bool quizFinished = false;
   bool hasMultipleCorrectAnswers = false;
-  List selectedAnswers = [];
+  List<Answer> selectedAnswers = [];
   List isSelected = [];
   bool confirmed = false;
 
@@ -33,7 +35,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   bool checkHasMultipleCorrectAnswers() {
     int correctCount = 0;
-    List<ApiAnswer> answers = widget.questions[currentIndex].answers;
+    List<Answer> answers = widget.questions[currentIndex].answers;
 
     for (var answer in answers) {
       if (answer.isCorrectAnswer) correctCount += 1;
@@ -76,7 +78,7 @@ class _QuizScreenState extends State<QuizScreen> {
   void confirm() {
     bool isAllCorrect = true;
     for (var answer in selectedAnswers) {
-      if (!answer['isCorrectAnswer']) isAllCorrect = false;
+      if (!answer.isCorrectAnswer) isAllCorrect = false;
     }
     if (isAllCorrect) {
       setState(() {
@@ -119,6 +121,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -145,7 +148,9 @@ class _QuizScreenState extends State<QuizScreen> {
                       ),
                     ],
                   ),
-                  child: Text(widget.questions[currentIndex].text),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(widget.questions[currentIndex].text)),
                 ),
                 Positioned(
                   top: 172,
@@ -154,7 +159,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     width: 90,
                     height: 35,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF5547F0),
+                      color: accentColor,
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Text(
