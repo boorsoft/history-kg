@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:history_kg/presentation/screens/article_screen.dart';
 import 'package:history_kg/presentation/screens/books_screen.dart';
 import 'package:history_kg/presentation/screens/persons_screen.dart';
 import 'package:history_kg/presentation/screens/quiz_menu_screen.dart';
@@ -56,6 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 10,
                               ),
                               QuizMenuScreen(),
+                              SeeAll("Тестирование", '/articleAllScreen'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ArticleScreen(),
                             ],
                           ),
                         ),

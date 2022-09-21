@@ -19,7 +19,7 @@ class BookCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => BookDetailedScreen(book.id, book.fileName)));
+            builder: (_) => BookDetailedScreen(book.fileName)));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Container(
@@ -47,25 +47,17 @@ class BookCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(
-            height: 5,
+            height: 8,
           ),
           Text(
             book.author,
             style: authorTS,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Row(
-              children: [
-                Text(
-                  "${book.city} - ",
-                  style: cityTS,
-                ),
-                Text(
-                  book.year.toString(),
-                  style: cityTS,
-                )
-              ],
+            padding: const EdgeInsets.only(top: 15),
+            child: Text(
+              "${book.city} - ${book.year.toString()}",
+              style: cityTS,
             ),
           )
         ]),

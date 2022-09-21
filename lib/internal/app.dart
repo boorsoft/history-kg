@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:history_kg/internal/dependencies/repository_modules/articles_repository_module.dart';
 import 'package:history_kg/internal/dependencies/repository_modules/book_repository_module.dart';
+import 'package:history_kg/presentation/screens/article_all_screen.dart';
 import 'package:history_kg/presentation/screens/books_all_screen.dart';
 import 'package:history_kg/presentation/screens/home_screen.dart';
+import 'package:history_kg/presentation/state/article_bloc/article_bloc.dart';
 import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
 import 'package:history_kg/presentation/state/persons_bloc/persons_bloc.dart';
 import 'package:history_kg/presentation/state/quiz_bloc/quiz_bloc.dart';
@@ -42,6 +45,12 @@ class _MyAppState extends State<MyApp> {
               QuizBloc(QuizRepositoryModule.quizApiUtil())..add(GetQuizEvent()),
           lazy: false,
         ),
+        BlocProvider(
+          create: (context) => ArticleBloc(
+            ArticlesRepositoryModule.articleDataRepository(),
+          )..add(GetArticlesEvent()),
+          lazy: false,
+        ),
       ],
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(statusBarColor: accentColor),
@@ -56,6 +65,7 @@ class _MyAppState extends State<MyApp> {
             "/personsAllScreen": (BuildContext context) =>
                 const PersonsAllScreen(),
             "/quizAllScreen": (context) => const QuizAllScreen(),
+            "/articleAllScreen": (context) => const ArticleAllScreen(),
           },
         ),
       ),

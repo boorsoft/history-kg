@@ -38,7 +38,7 @@ class QuizAllScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       var quiz = state.quizes[index];
 
-                      return QuizImageButton(quiz);
+                      return QuizImageButton(quiz, true);
                     },
                   );
                 }

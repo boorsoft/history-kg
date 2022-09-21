@@ -37,6 +37,7 @@ dependencies:
   dio: ^4.0.6
   flutter_bloc: ^8.1.1
   easy_pdf_viewer: ^1.0.3
+  url_launcher: ^6.1.5
   # cached_network_image: ^3.2.2
 
 dev_dependencies:

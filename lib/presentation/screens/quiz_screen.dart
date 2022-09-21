@@ -1,4 +1,3 @@
-import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:history_kg/presentation/utils/styles.dart';
 

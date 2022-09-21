@@ -6,12 +6,15 @@ import '../screens/quiz_screen.dart';
 
 class QuizImageButton extends StatelessWidget {
   final Quiz quiz;
-  const QuizImageButton(this.quiz, {Key? key}) : super(key: key);
+  final bool isAll;
+  const QuizImageButton(this.quiz, this.isAll, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 27, right: 27, bottom: 25),
+      padding: isAll
+          ? const EdgeInsets.only(left: 27, right: 27, bottom: 25)
+          : const EdgeInsets.all(0),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -13,7 +15,8 @@ class PersonsBloc extends Bloc<PersonsEvent, PersonsState> {
   }
   final PersonDataRepository _personsRepository;
 
-  _onGetPersons(GetPersonsEvent event, Emitter<PersonsState> emit) async {
+  FutureOr<void> _onGetPersons(
+      GetPersonsEvent event, Emitter<PersonsState> emit) async {
     emit(PersonsLoadingState());
     final persons = await _personsRepository.getPersons();
     emit(PersonsLoadedState(persons));

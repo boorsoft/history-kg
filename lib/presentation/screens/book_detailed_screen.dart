@@ -5,9 +5,8 @@ import 'package:history_kg/presentation/utils/styles.dart';
 import '../utils/constans.dart';
 
 class BookDetailedScreen extends StatefulWidget {
-  final int id;
   final String url;
-  const BookDetailedScreen(this.id, this.url, {Key? key}) : super(key: key);
+  const BookDetailedScreen(this.url, {Key? key}) : super(key: key);
 
   @override
   State<BookDetailedScreen> createState() => _BookDetailedScreenState();

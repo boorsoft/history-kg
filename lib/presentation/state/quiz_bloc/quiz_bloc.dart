@@ -16,7 +16,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
 
   final QuizDataRepository _dataRepository;
 
-  _onGetQuiz(GetQuizEvent event, Emitter<QuizState> emit) async {
+  FutureOr<void> _onGetQuiz(GetQuizEvent event, Emitter<QuizState> emit) async {
     emit(QuizLoadingState());
     final quizes = await _dataRepository.getQuizes();
     emit(QuizLoadedState(quizes));

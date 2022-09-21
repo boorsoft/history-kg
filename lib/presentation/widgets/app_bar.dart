@@ -55,11 +55,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       ),
                     ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.60,
+                    width: MediaQuery.of(context).size.width * 0.70,
                     alignment: Alignment.center,
                     child: Text(
                       widget.title,
                       style: appBarTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
