@@ -7,8 +7,8 @@ import 'internal/app.dart';
 void main() {
   // SearchService searchService = SearchService();
   // print("${searchService.fetchData("История")} main");
-  SearchApiUtil searchApiUtil =
-      SearchApiUtil(searchService: SearchService(), searchValue: "Айтматов");
-  searchApiUtil.getSearch();
+  // SearchApiUtil searchApiUtil =
+  //     SearchApiUtil(searchService: SearchService());
+  // searchApiUtil.getSearch();
   runApp(const MyApp());
 }

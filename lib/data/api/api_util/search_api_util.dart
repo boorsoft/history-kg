@@ -3,13 +3,11 @@ import 'package:history_kg/data/mappers/search_mapper.dart';
 
 class SearchApiUtil {
   final SearchService searchService;
-  final String searchValue;
 
-  SearchApiUtil({required this.searchService, required this.searchValue});
+  SearchApiUtil({required this.searchService});
 
-  Future<List<dynamic>> getSearch() async {
-    final result = await searchService.fetchData(searchValue);
-
+  Future<List<dynamic>> getSearch(String query) async {
+    final result = await searchService.fetchData(query);
     return SearchMapper.fromListJSON(result);
   }
 }

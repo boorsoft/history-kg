@@ -20,7 +20,7 @@ class ApiQuiz {
             subjectId: e['subjectId'],
             questions: List<ApiQuestions>.from(
               e['questions'].map(
-                (question) => ApiQuestions.fromListApi(question),
+                (question) => ApiQuestions.fromApi(question),
               ),
             ),
           ),
@@ -36,7 +36,7 @@ class ApiQuiz {
       subjectId: map['subjectId'],
       questions: List<ApiQuestions>.from(
         map['questions'].map(
-          (question) => ApiQuestions.fromListApi(question),
+          (question) => ApiQuestions.fromApi(question),
         ),
       ),
     );
@@ -56,12 +56,31 @@ class ApiQuestions {
     required this.answers,
   });
 
-  ApiQuestions.fromListApi(Map<String, dynamic> map)
-      : id = map['id'],
-        text = map['text'],
-        quizId = map['quizId'],
-        answers = List<ApiAnswer>.from(
-            map['answers'].map((e) => ApiAnswer.fromApi(e)));
+  static ApiQuestions fromApi(Map<String, dynamic> map) {
+    return ApiQuestions(
+        id: map['id'],
+        text: map['text'],
+        quizId: map['quizId'],
+        answers: List<ApiAnswer>.from(
+            map['answers'].map((e) => ApiAnswer.fromApi(e))));
+  }
+
+  static List<ApiQuestions> fromListApi(List<dynamic> map) {
+    return map
+        .map(
+          (map) => ApiQuestions(
+            id: map['id'],
+            text: map['text'],
+            quizId: map['quizId'],
+            answers: List<ApiAnswer>.from(
+              map['answers'].map(
+                (e) => ApiAnswer.fromApi(e),
+              ),
+            ),
+          ),
+        )
+        .toList();
+  }
 }
 
 class ApiAnswer {

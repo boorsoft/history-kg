@@ -10,6 +10,7 @@ class SearchService {
       "$API_URL/api/search",
       queryParameters: {'searchValue': searchValue},
     );
+
     return ApiSearch.fromListApi(response.data);
 
     // } on SocketException {

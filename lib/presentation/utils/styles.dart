@@ -42,13 +42,6 @@ TextStyle failureMessageTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-Widget circularIndicator = Container(
-  color: const Color(0xFFE5E5E5),
-  child: const Center(
-    child: CircularProgressIndicator(color: Color(0xFF5547F0)),
-  ),
-);
-
 Color wrongAnswerColor = const Color(0xFFFF7888);
 Color correctAnswerColor = const Color(0xFF81FFC2);
 Color correctUnselectedColor = const Color(0xFFb2d6e0);

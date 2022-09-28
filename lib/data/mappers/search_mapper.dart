@@ -1,3 +1,5 @@
+import 'package:history_kg/data/api/models/api_quiz.dart';
+import 'package:history_kg/data/mappers/quiz_mapper.dart';
 import 'package:history_kg/domain/models/article.dart';
 import 'package:history_kg/domain/models/book.dart';
 import 'package:history_kg/domain/models/person.dart';
@@ -35,18 +37,19 @@ class SearchMapper {
             )
             .toList();
       } else if (res.type == 'quiz' && res.data.isNotEmpty) {
-        res.data
+        return res.data
             .map(
               (quiz) => Quiz(
                 id: quiz['id'],
                 title: quiz['title'],
                 subjectId: quiz['subjectId'],
-                questions: quiz['questions'],
+                questions: QuestionsMapper.fromListMap(
+                    ApiQuestions.fromListApi(quiz['questions'])),
               ),
             )
             .toList();
       } else if (res.type == 'articles' && res.data.isNotEmpty) {
-        res.data
+        return res.data
             .map(
               (article) => Article(
                 id: article['id'],
