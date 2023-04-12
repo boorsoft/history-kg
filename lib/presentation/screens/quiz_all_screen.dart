@@ -15,6 +15,7 @@ class QuizAllScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
+        top: false,
         child: Column(
           children: [
             const CustomAppBar("Тестирование"),

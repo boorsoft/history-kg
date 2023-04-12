@@ -50,5 +50,5 @@ Color backgroundColor = const Color(0xFFF5F5F5);
 Color primaryClor = const Color(0xFFFFFEFD);
 Color accentColor = const Color(0xFFFFD367);
 Color textFieldBackgroundColor = const Color(0xFFFCE4A9);
-Color shadowColor = const Color(0xFF4937260D).withOpacity(0.05);
+Color shadowColor = const Color(0xff4937260d).withOpacity(0.05);
 Color personContainerColor = const Color(0xFF2B2929).withOpacity(0.5);

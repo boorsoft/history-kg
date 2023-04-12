@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:history_kg/presentation/screens/article_screen.dart';
 import 'package:history_kg/presentation/screens/books_screen.dart';
 import 'package:history_kg/presentation/screens/persons_screen.dart';
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColor,

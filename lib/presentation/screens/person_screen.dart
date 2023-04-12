@@ -13,6 +13,7 @@ class PersonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        top: false,
         child: Column(
           children: [
             CustomAppBar("${person.firstName} ${person.lastName}"),

@@ -12,6 +12,7 @@ class Failure extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        top: false,
         child: Center(
           child: Column(
             children: [

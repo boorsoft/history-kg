@@ -122,6 +122,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
+        top: false,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

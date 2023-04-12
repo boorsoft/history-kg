@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:history_kg/internal/dependencies/repository_modules/articles_repository_module.dart';
 import 'package:history_kg/internal/dependencies/repository_modules/book_repository_module.dart';
 import 'package:history_kg/presentation/screens/article_all_screen.dart';
-import 'package:history_kg/presentation/screens/book_detailed_screen.dart';
 import 'package:history_kg/presentation/screens/books_all_screen.dart';
-import 'package:history_kg/presentation/screens/books_screen.dart';
 import 'package:history_kg/presentation/screens/home_screen.dart';
 import 'package:history_kg/presentation/state/article_bloc/article_bloc.dart';
 import 'package:history_kg/presentation/state/book_bloc/book_bloc.dart';
@@ -54,22 +52,21 @@ class _MyAppState extends State<MyApp> {
           lazy: false,
         ),
       ],
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(statusBarColor: accentColor),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme:
-              ThemeData(fontFamily: 'Roboto', backgroundColor: backgroundColor),
-          initialRoute: "/home",
-          routes: <String, WidgetBuilder>{
-            "/home": (BuildContext context) => const HomeScreen(),
-            "/booksAllScreen": (BuildContext context) => const BooksAllScreen(),
-            "/personsAllScreen": (BuildContext context) =>
-                const PersonsAllScreen(),
-            "/quizAllScreen": (context) => const QuizAllScreen(),
-            "/articleAllScreen": (context) => const ArticleAllScreen(),
-          },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+          backgroundColor: backgroundColor,
         ),
+        initialRoute: "/home",
+        routes: <String, WidgetBuilder>{
+          "/home": (BuildContext context) => const HomeScreen(),
+          "/booksAllScreen": (BuildContext context) => const BooksAllScreen(),
+          "/personsAllScreen": (BuildContext context) =>
+              const PersonsAllScreen(),
+          "/quizAllScreen": (context) => const QuizAllScreen(),
+          "/articleAllScreen": (context) => const ArticleAllScreen(),
+        },
       ),
     );
   }

@@ -11,6 +11,7 @@ class QuizMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: BlocBuilder<QuizBloc, QuizState>(
         builder: (context, state) {
           if (state is QuizLoadingState) {

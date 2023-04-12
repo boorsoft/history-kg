@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 const String API_URL = "http://historykg.boorsoft.com";
 const String API_BOOKS = "$API_URL/api/books";
 const String API_QUIZ = "$API_URL/api/quiz";
