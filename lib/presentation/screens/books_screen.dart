@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:history_kg/presentation/utils/styles.dart';
+import 'package:history_kg/presentation/widgets/app_failure.dart';
+import 'package:history_kg/presentation/widgets/shimmer_generator.dart';
 
 import '../state/book_bloc/book_bloc.dart';
 import '../widgets/book_card.dart';
@@ -15,13 +17,12 @@ class BooksScreen extends StatelessWidget {
         return Column(
           children: [
             if (state is BookLoadingState)
-              SizedBox(
+              const ShimmerGenerator(
+                count: 3,
+                axisDirection: Axis.horizontal,
                 height: 114,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: accentColor,
-                  ),
-                ),
+                width: 270,
+                padding: EdgeInsets.only(right: 16),
               ),
             if (state is BookLoadedState)
               SizedBox(
@@ -43,6 +44,11 @@ class BooksScreen extends StatelessWidget {
                   },
                 ),
               ),
+            if (state is BookErrorState)
+              Failure(
+                state.err,
+                height: 114,
+              )
           ],
         );
       },

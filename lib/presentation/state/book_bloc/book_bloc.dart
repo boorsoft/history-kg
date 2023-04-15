@@ -18,15 +18,23 @@ class BookBloc extends Bloc<BookEvent, BookState> {
 
   FutureOr<void> _onGetBooks(
       GetBooksEvent booksEvent, Emitter<BookState> emit) async {
-    emit(BookLoadingState());
-    final books = await _bookDataRepository.getBooks();
-    emit(BookLoadedState(books));
+    try {
+      emit(BookLoadingState());
+      final books = await _bookDataRepository.getBooks();
+      emit(BookLoadedState(books));
+    } catch (err) {
+      emit(BookErrorState(err: err));
+    }
   }
 
   FutureOr<void> _onGetBookById(
       GetBookByIdEvent bookEvent, Emitter<BookState> emit) async {
-    emit(BookLoadingState());
-    final book = await _bookDataRepository.getBookById(bookId: bookEvent.id);
-    emit(BookByIdFetchedState(book));
+    try {
+      emit(BookLoadingState());
+      final book = await _bookDataRepository.getBookById(bookId: bookEvent.id);
+      emit(BookByIdFetchedState(book));
+    } catch (err) {
+      emit(BookErrorState(err: err));
+    }
   }
 }

@@ -16,8 +16,12 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
 
   FutureOr<void> _onGetArticle(
       ArticleEvent event, Emitter<ArticleState> emit) async {
-    emit(ArticleLoadingState());
-    final res = await _articleDataRepository.getArticles();
-    emit(ArticleLoadedState(res));
+    try {
+      emit(ArticleLoadingState());
+      final res = await _articleDataRepository.getArticles();
+      emit(ArticleLoadedState(res));
+    } catch (err) {
+      emit(ArticleErrorState(err));
+    }
   }
 }

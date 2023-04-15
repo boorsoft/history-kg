@@ -8,17 +8,10 @@ class QuizService {
   Future<List<ApiQuiz>> fetchQuiz() async {
     final response = await _dio.get(API_QUIZ);
     return ApiQuiz.fromListApi(response.data);
-
-    // } on SocketException {
-    //   return ['no internet'];
-    // } on HttpException {
-    //   return ['500'];
-    // }
   }
 
   Future<ApiQuiz> fetchQuizById(int id) async {
     final response = await _dio.get("$API_QUIZ/$id");
-    // print(jsonDecode(response.body));
     return ApiQuiz.fromApi(response.data);
   }
 }

@@ -12,3 +12,9 @@ class PersonsLoadedState extends PersonsState {
 
   PersonsLoadedState(this.persons);
 }
+
+class PersonsErrorState extends PersonsState {
+  final dynamic error;
+
+  PersonsErrorState({this.error});
+}

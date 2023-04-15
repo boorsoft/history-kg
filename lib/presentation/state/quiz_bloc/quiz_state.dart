@@ -12,3 +12,9 @@ class QuizLoadedState extends QuizState {
 
   QuizLoadedState(this.quizes);
 }
+
+class QuizErrorState extends QuizState {
+  final dynamic error;
+
+  QuizErrorState({this.error});
+}

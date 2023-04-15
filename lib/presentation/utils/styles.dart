@@ -39,7 +39,7 @@ TextStyle cityTS = const TextStyle(
 TextStyle failureMessageTextStyle = TextStyle(
   color: const Color(0xFF28254A).withOpacity(0.7),
   fontSize: 17,
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w600,
 );
 
 Color wrongAnswerColor = const Color(0xFFFF7888);

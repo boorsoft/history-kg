@@ -17,8 +17,12 @@ class PersonsBloc extends Bloc<PersonsEvent, PersonsState> {
 
   FutureOr<void> _onGetPersons(
       GetPersonsEvent event, Emitter<PersonsState> emit) async {
-    emit(PersonsLoadingState());
-    final persons = await _personsRepository.getPersons();
-    emit(PersonsLoadedState(persons));
+    try {
+      emit(PersonsLoadingState());
+      final persons = await _personsRepository.getPersons();
+      emit(PersonsLoadedState(persons));
+    } catch (err) {
+      emit(PersonsErrorState(error: err));
+    }
   }
 }

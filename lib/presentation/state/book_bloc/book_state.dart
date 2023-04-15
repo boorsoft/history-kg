@@ -18,3 +18,9 @@ class BookByIdFetchedState extends BookState {
 }
 
 class BookLoadingState extends BookState {}
+
+class BookErrorState extends BookState {
+  final dynamic err;
+
+  BookErrorState({this.err});
+}

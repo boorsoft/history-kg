@@ -21,8 +21,6 @@ class QuizImageButton extends StatelessWidget {
               builder: (context) => QuizScreen(quiz.questions)));
         },
         child: Container(
-          width: 360,
-          height: 100,
           decoration: BoxDecoration(
             color: const Color(0xFFF9F9FF),
             borderRadius: BorderRadius.circular(18),
@@ -38,7 +36,7 @@ class QuizImageButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 25),
+                padding: const EdgeInsets.only(left: 16),
                 child: Image.asset(
                   "assets/images/Multiple Choice.png",
                   width: 44,

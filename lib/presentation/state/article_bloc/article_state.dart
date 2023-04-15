@@ -12,3 +12,9 @@ class ArticleLoadedState extends ArticleState {
 
   ArticleLoadedState(this.articles);
 }
+
+class ArticleErrorState extends ArticleState {
+  final dynamic error;
+
+  ArticleErrorState(this.error);
+}
