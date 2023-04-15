@@ -30,25 +30,22 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => BookBloc(BookRepositoryModule.bookRepository())
-            ..add(GetBooksEvent()),
+          create: (context) => BookBloc(BookRepositoryModule.bookRepository()),
           lazy: false,
         ),
         BlocProvider(
           create: (context) =>
-              PersonsBloc(PersonRepositoryModule.personApiUtil())
-                ..add(GetPersonsEvent()),
+              PersonsBloc(PersonRepositoryModule.personApiUtil()),
           lazy: false,
         ),
         BlocProvider(
-          create: (context) =>
-              QuizBloc(QuizRepositoryModule.quizApiUtil())..add(GetQuizEvent()),
+          create: (context) => QuizBloc(QuizRepositoryModule.quizApiUtil()),
           lazy: false,
         ),
         BlocProvider(
           create: (context) => ArticleBloc(
             ArticlesRepositoryModule.articleDataRepository(),
-          )..add(GetArticlesEvent()),
+          ),
           lazy: false,
         ),
       ],
